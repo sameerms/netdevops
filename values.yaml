@@ -1,0 +1,51 @@
+# values.yaml for NetBox Helm Chart
+
+# NetBox application configuration
+netbox:
+  image:
+    repository: netbox
+    tag: latest
+  secretKey: "randomsecretkey"  # Replace with your secret key or keep a random value for testing
+  allowedHosts: ["*"]  # Adjust allowed hosts (e.g., if deploying locally, use "localhost")
+  debug: true  # Turn on debugging for development
+
+# PostgreSQL configuration
+postgresql:
+  enabled: true
+  postgresqlDatabase: netbox
+  postgresqlUsername: netbox_user
+  postgresqlPassword: "your-strong-password"  # Change this to a secure password
+  persistence:
+    enabled: true
+    size: 8Gi  # Adjust the size of persistent volume
+
+# Redis configuration
+redis:
+  master:
+    persistence:
+      enabled: true
+      size: 1Gi  # Adjust the size of Redis persistence
+
+# Enable worker pods
+workers:
+  enabled: true  # Allow worker pods to process background jobs
+  extraEnv:
+    - name: ENABLE_API_SCHEMA
+      value: "True"
+
+
+# Resources configuration for each container (optional)
+resources:
+  limits:
+    cpu: "2"
+    memory: "2Gi"
+  requests:
+    cpu: "500m"
+    memory: "1Gi"
+
+service:
+  type: NodePort
+  ports:
+    http: 80
+    https: 443
+
