@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import AddDevice from "./AddDevice";
+import AddDevice from "./adddevice";
+
 
 function App() {
   // State to hold the list of devices
