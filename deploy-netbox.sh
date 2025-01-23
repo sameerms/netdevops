@@ -10,3 +10,9 @@ kubectl create namespace netbox || true
 helm install netbox netbox/netbox --namespace netbox -f values.yaml
 
 echo "NetBox is deployed. Verify with 'kubectl get pods -n netbox'."
+
+
+echo " add harbor"
+helm repo add harbor https://helm.goharbor.io
+helm repo update
+helm install harbor harbor/harbor --namespace harbor --create-namespace
